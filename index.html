@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+    <div id='wrapper'>
+        <div id="wireframe1">
+            <div class="bg">
+
+
+
+            </div>
+
+            <div class="select" id="s1">
+                <h1>Select stage</h1>
+                <button class='btn' input="dojo_arena_photos/dojo.jpg">Dojo</button>
+                <button class='btn' input="dojo_arena_photos/snow.jpg">Snow</button>
+                <button class='btn' input="dojo_arena_photos/beach.jpg">Beach</button>
+                <button class='btn' input="dojo_arena_photos/earth.jpg">Earth</button>
+                <button class='btn' input="dojo_arena_photos/forest.jpg">Forest</button>
+                <button class='btn' input="dojo_arena_photos/matrix.jpg">Matrix</button>
+            </div>
+        </div>
+        <!-- end of wireframe1 -->
+
+        <div id="wireframe2">
+            <div class="bg">
+
+            </div>
+
+            <div class="select" id="s2">
+                <h1>Select</h1>
+                <p>Player 1<span id="pad"></span>Player 2</p>
+                <select id="leftSelect">
+                        <option name="dojo_arena_photos/raphael.png">Raphael</option>
+                        <option name="dojo_arena_photos/mikey.png">Michaelangelo</option>
+                        <option name="dojo_arena_photos/donny.png">Donatello</option>
+                        <option name="dojo_arena_photos/leo.png">Leo</option>
+                </select>
+                <select id="rightSelect">
+                        <option name="dojo_arena_photos/raphael.png">Raphael</option>
+                        <option name="dojo_arena_photos/mikey.png">Michaelangelo</option>
+                        <option name="dojo_arena_photos/donny.png">Donatello</option>
+                        <option name="dojo_arena_photos/leo.png">Leo</option>
+                </select>
+            </div>
+
+        </div>
+        <img id="leftImg" src="dojo_arena_photos/raphael.png" alt="">
+        <img id="rightImg" src="dojo_arena_photos/raphael.png" alt="">
+        <!-- end of wireframe2 -->
+    </div>
+
+    <script>
+        $('#wireframe1 button').click(function() {
+            var temp = 'url("' + $(this).attr('input') + '")';
+            $('.bg').css('background-image', temp);
+            $('#wireframe1').hide();
+            $('#wireframe2').show();
+            $('#wireframe2').css('background-image', temp);
+            console.log(temp);
+        });
+
+        $('#wireframe1 button').hover(function() {
+
+            var temp = 'url("' + $(this).attr('input') + '")';
+            console.log(temp);
+
+            $('.bg').css('background-image', temp);
+        }, function() {
+            $('.bg').css('background-image', 'none');
+        });
+
+        function displayChoice() {
+            var selection = $(this).val();
+            var charImg = "";
+            switch (selection) {
+                case "Raphael":
+                    charImg = "dojo_arena_photos/raphael.png";
+                    break;
+                case "Michaelangelo":
+                    charImg = "dojo_arena_photos/mikey.png";
+                    break;
+                case "Donatello":
+                    charImg = "dojo_arena_photos/donny.png";
+                    break;
+                case "Leo":
+                    charImg = "dojo_arena_photos/leo.png";
+                    break;
+            }
+
+            console.log($(this).attr('id'));
+            if ($(this).attr('id') === "leftSelect") {
+                $('#leftImg').attr('src', charImg);
+                $('#leftImg').css('visibility', 'visible');
+            } else {
+                $('#rightImg').attr('src', charImg);
+                $('#rightImg').css('visibility', 'visible');
+            }
+            // $('img').attr('src', charImg);
+            console.log(charImg, selection);
+        }
+
+        $('#leftSelect').change(displayChoice);
+
+
+        $('#rightSelect').change(displayChoice);
+        displayChoice();
+    </script>
+</body>
+
+</html>
